@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>面试随笔 ~ | TF&#39;s Blog</title>
+  <title>MySQL相关 | TF&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <link rel="shortcut icon" href="/MyHexo/favicon.png">
@@ -43,8 +43,8 @@
       <div class="outer">
         <section id="main"><article id="post-MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/MyHexo/interview-mysql.html" class="article-date">
-  <time class="dt-published" datetime="2021-07-16T15:45:50.499Z" itemprop="datePublished">2021-07-16</time>
+    <a href="/MyHexo/interview-MySQL.html" class="article-date">
+  <time class="dt-published" datetime="2021-07-17T12:07:36.405Z" itemprop="datePublished">2021-07-17</time>
 </a>
     
   </div>
@@ -55,7 +55,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      面试随笔 ~
+      MySQL相关
     </h1>
   
 
@@ -63,7 +63,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="1、mysql聚簇索引和非聚簇索引"><a href="#1、mysql聚簇索引和非聚簇索引" class="headerlink" title="1、mysql聚簇索引和非聚簇索引"></a>1、mysql聚簇索引和非聚簇索引</h2><ul>
+        <h2 id="1、MySQL聚簇索引和非聚簇索引"><a href="#1、MySQL聚簇索引和非聚簇索引" class="headerlink" title="1、MySQL聚簇索引和非聚簇索引"></a>1、MySQL聚簇索引和非聚簇索引</h2><ul>
 <li>聚簇索引：索引和数据存储在一起，并且具有一定顺序，即找到索引就等于找到数据。在物理逻辑上，只要索引相邻，则数据也是存放在连续的磁盘空间上。</li>
 <li>非聚簇索引：叶子节点不存放数据，存储数据行位置。根据索引找到对应数据行的地址，然后再根据地址查找数据。</li>
 <li>聚簇索引优势：<ul>
@@ -82,8 +82,8 @@
 <li>myisam采用非聚簇索引。主键索引的B+树节点存储主键，辅助索引的B+树存储辅助键。表数据存储在独立的地方，主键索引树和辅助索引上都存有地址指向真正的表数据物理地址。由于索引树是独立的，所以辅助索引查询无需回到主键索引树上进行二次查找。</li>
 <li>场景：涉及大数据量排序、全表扫描、count等操作，推荐myisam</li>
 </ul>
-<h2 id="2-mysql索引数据结构，各自优劣"><a href="#2-mysql索引数据结构，各自优劣" class="headerlink" title="2 mysql索引数据结构，各自优劣"></a>2 mysql索引数据结构，各自优劣</h2><ul>
-<li>mysql中使用较多的有hash索引，b+树索引。hash索引底层数据结构为hash表，当<strong>查询场景多为单条数据</strong>时，可以使用哈希索引。</li>
+<h2 id="2-MySQL索引数据结构，各自优劣"><a href="#2-MySQL索引数据结构，各自优劣" class="headerlink" title="2 MySQL索引数据结构，各自优劣"></a>2 MySQL索引数据结构，各自优劣</h2><ul>
+<li>MySQL中使用较多的有hash索引，b+树索引。hash索引底层数据结构为hash表，当<strong>查询场景多为单条数据</strong>时，可以使用哈希索引。</li>
 <li>innodb默认b+树</li>
 <li>b+树是平衡多叉树，基于AVL，同层级间具有前后指针，可以按顺序快速左右移动。</li>
 <li>hash算法，根据一定算法，把索引/键值计算成hash并存储，o(1)复杂度，单条效率极高，但多条/范围场景及难使用。hash不支持范围查询、模糊查询和联合索引。有大量重复键的情况下，极易出现hash冲突，参照hashmap实现。</li>
@@ -112,7 +112,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-mysql锁类型"><a href="#4-mysql锁类型" class="headerlink" title="4 mysql锁类型"></a>4 mysql锁类型</h2><ul>
+<h2 id="4-MySQL锁类型"><a href="#4-MySQL锁类型" class="headerlink" title="4 MySQL锁类型"></a>4 MySQL锁类型</h2><ul>
 <li>基于属性： 共享锁、排它锁<ul>
 <li>共享锁：读锁（S锁）。支持并发读取，同时能够多个S锁，但不允许X锁</li>
 <li>排它锁（X锁）。禁止其他锁。</li>
@@ -138,7 +138,7 @@
 <li>key_len： 查询优化用到的索引字节数，可以判断索引是否完全使用到</li>
 <li>rows：扫描经过的行，如果行数较多，可能是索引设置不对或传入参数不对，需要重新研究并优化。</li>
 <li>filter：返回结果行/rows，越高则说明查询越准确</li>
-<li>extra.using filesort：表示mysql对结果进行外部排序，不能通过索引达到排序效果，需要优化</li>
+<li>extra.using filesort：表示MySQL对结果进行外部排序，不能通过索引达到排序效果，需要优化</li>
 <li>using index：覆盖索引扫描</li>
 <li>using temporary：是否使用临时表，例如join, sort, groupby场景</li>
 <li>type：索引优化的关键字段<ul>
@@ -173,7 +173,7 @@
 <h2 id="7-慢查询相关"><a href="#7-慢查询相关" class="headerlink" title="7 慢查询相关"></a>7 慢查询相关</h2><ul>
 <li>慢查询原因：索引未命中？load了不需要的数据列？数据量太大？</li>
 <li>优化：<ul>
-<li>分析语句，是否加载了无用的行或者字段</li>
+<li>分析语句，是否加载了无用的行或者字段（<strong>索引覆盖</strong>：当查询字段是联合索引子集时，可以在辅助索引树上完成查询，无需回表查询）</li>
 <li>分析执行计划，看是否有命中索引</li>
 <li>如果表数据量过大， 则需要横向或纵向分表</li>
 </ul>
@@ -183,7 +183,7 @@
 <li>A靠undo log保证，记录了需要回滚的日志信息，事务回滚时撤销已经执行成功的sql</li>
 <li>C靠其他三大特性保证，代码上要保证业务的一致性</li>
 <li>I靠MVCC保证</li>
-<li>D靠内存+redo log保证，mysql修改数据同时在内存和redo log记录此次操作，宕机可以从redo log恢复。redo log的刷盘（持久化到硬盘空间）会在系统空闲时进行。</li>
+<li>D靠内存+redo log保证，MySQL修改数据同时在内存和redo log记录此次操作，宕机可以从redo log恢复。redo log的刷盘（持久化到硬盘空间）会在系统空闲时进行。</li>
 <li>InnoDB redo log写盘，事务进入prepare状态，如果prepare成功，则binlog写盘，再将事务日志持久化到binlog，持久化成功，则事务进入commit状态（在redo log里写一个commit记录）<ul>
 <li>binlog作用：用于记录“修改数据或可能引起数据变更”的SQL语句。恢复数据、主从复制(新开线程dump到子节点)、审计</li>
 <li>事务成功的标志：redo log内有commit标记</li>
@@ -192,17 +192,28 @@
 </ul>
 <h2 id="9-什么是MVCC"><a href="#9-什么是MVCC" class="headerlink" title="9 什么是MVCC"></a>9 什么是MVCC</h2><ul>
 <li>MVCC 多版本并发控制：读取数据时引入快照机制，仅能在已提交读和可重复读两个隔离级别下工作（读未提交总读到最新的，无需版本控制；串行化会加X锁，无需版本控制）</li>
+<li>MVCC：readView理解 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42651904/article/details/110622818">https://blog.csdn.net/qq_42651904/article/details/110622818</a></li>
 <li>聚簇索引必要的隐藏列：<ul>
 <li>trx_id：每次对某条聚簇索引记录进行修改时候记录的事务id</li>
 <li>roll_pointer：每次对聚簇索引有修改的时候，会把老版本写入undo log。roll_pointer作为指针指向老版本数据的位置。</li>
 </ul>
 </li>
 <li>多事务并行：<ul>
-<li>开始事务时创建readView，维护当前活动的trx_id，并将未提交的trx_id排序生成一个数组</li>
-<li>访问数据时，获取数组中的trx_id并对比<ul>
-<li>如果trx_id比readView都小，则意味着事务已提交，可以访问</li>
-<li>如果trx_id比readView都大，则事务还未提交，不能访问</li>
-<li>如果trx_id在readView中间，则说明事务还未提交。已提交读会在每次查询时生成一个readView，可重复读只会在第一次读时新建readView，后续都复用上一个readView(保证可重复读的原因，前后查询到的数据是一样的)</li>
+<li>开始事务时创建readView，维护当前活动的trx_id，并将未提交的trx_id排序生成一个数组<ul>
+<li>creator trx_id当前事务id</li>
+<li>m_ids 待提交事务id集合</li>
+<li>min_trx_id m_ids内最小事务值</li>
+<li>max_trx_id 最大事务值(当前最大trx_id+1)</li>
+</ul>
+</li>
+<li>读取数据时(read_trx_id)，获取数组中的trx_id并对比<ul>
+<li>如果read_trx_id &lt; 当前数据的trx_id，则需要通过roll_pointer向上找到第一个read_trx_id &gt; trx_id的数据并返回</li>
+<li>如果read_trx_id比readView的max_trx_id都大，则事务还未提交，不能访问</li>
+<li>如果trx_id在readView中间，则说明事务还未提交。<ul>
+<li>隔离级别为RC时，会在每次查询时重新生成一个readView(trx_id发生变化)</li>
+<li>隔离级别为RR时，当前读的trx_id不变，依然沿roll_pointer向上找到第一个read_trx_id &gt; trx_id的数据并返回，这样多次读的结果是一致的。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -250,7 +261,21 @@
 <h2 id="13-索引失效原因"><a href="#13-索引失效原因" class="headerlink" title="13 索引失效原因"></a>13 索引失效原因</h2><ul>
 <li>SQL没有符合最左前缀原则</li>
 <li>字段进行了隐式类型转换</li>
-<li>索引</li>
+<li>最左前缀原则：最左列有序时，才能保证右边的列有序<ul>
+<li><p>全值匹配时，MySQL会优化查询，例如index(a,b,c)，where a= &amp; b = c= 用到了索引查询，同时where b= &amp; c =&amp;a= 也会用到索引查询</p>
+</li>
+<li><p>部分值匹配时，遵循最左前缀原则</p>
+</li>
+<li><p>条件中没有最左索引时，走全表扫描</p>
+</li>
+<li><p>匹配范围值，可以对最左边的列进行范围查询，范围查询指，&lt;、&gt;、between等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from table_name where a&lt;&#x27;&#x27; and c=&#x27;&#x27;; //索引查询</span><br><span class="line">select * from table_name where a between &#x27;&#x27; and &#x27;&#x27;; //索引查询</span><br><span class="line">select * from table_name where a like &#x27;A%&#x27;; //走索引查询</span><br><span class="line">select * from table_name where  a like &#x27;%A&#x27;//全表查询</span><br><span class="line">select * from table_name where  a like &#x27;%A%&#x27;//全表查询</span><br></pre></td></tr></table></figure></li>
+<li><p>精确匹配最左列和范围匹配另外一列时会使用索引(结合b+树结构好好想想)</p>
+</li>
+<li><p>order排序</p>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="14-innodb实现事务原理"><a href="#14-innodb实现事务原理" class="headerlink" title="14 innodb实现事务原理"></a>14 innodb实现事务原理</h2><p>innodb通过buffer pool、log buffer、 redo log和undo log实现事务</p>
 <ul>
@@ -277,11 +302,30 @@
 </ul>
 </li>
 </ul>
+<h2 id="16-死锁"><a href="#16-死锁" class="headerlink" title="16 死锁"></a>16 死锁</h2><ul>
+<li>根因<ul>
+<li>多个不同的session加锁顺序不一致</li>
+</ul>
+</li>
+<li>避免<ul>
+<li>以固定顺序访问表和行</li>
+<li>事务尽量拆小</li>
+<li>降低隔离级别。rc降至rr可以避免很多因为gap锁造成的死锁</li>
+<li>添加合理的索引。不走索引的话会给表的每一行记录加锁，死锁概率增大。</li>
+</ul>
+</li>
+<li>线上定位与解决<ul>
+<li>show engine innodb status</li>
+<li>show processlist</li>
+<li>kill 用户线程</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chnyge.github.io/MyHexo/interview-mysql.html" data-id="ckr6xrj030000udmzgz6k71jf" data-title="面试随笔 ~" class="article-share-link">分享</a>
+      <a data-url="https://chnyge.github.io/MyHexo/interview-MySQL.html" data-id="ckr6xrj030000udmzgz6k71jf" data-title="MySQL相关" class="article-share-link">分享</a>
       
       
       
@@ -306,7 +350,7 @@
       <ul>
         
           <li>
-            <a href="/MyHexo/interview-mysql.html">面试随笔 ~</a>
+            <a href="/MyHexo/interview-MySQL.html">MySQL相关</a>
           </li>
         
       </ul>
