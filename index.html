@@ -456,6 +456,98 @@
 
 
   
+    <article id="post-字节面试0725" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/MyHexo/interview-bytesdance-0.html" class="article-date">
+  <time class="dt-published" datetime="2021-07-25T12:00:00.000Z" itemprop="datePublished">2021-07-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/MyHexo/categories/%E9%9D%A2%E7%BB%8F/">面经</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/MyHexo/interview-bytesdance-0.html">字节一面面经(抖音电商服务端开发)(凉)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="面试岗位"><a href="#面试岗位" class="headerlink" title="面试岗位"></a>面试岗位</h3><p>​    抖音电商服务端开发</p>
+<h3 id="面试形式"><a href="#面试形式" class="headerlink" title="面试形式"></a>面试形式</h3><p>​    牛客网线上面试，全程约95min（其中面试时间75min+手撕代码20min）</p>
+<h3 id="面试题目"><a href="#面试题目" class="headerlink" title="面试题目"></a>面试题目</h3><p><strong>1、自我介绍</strong></p>
+<p><strong>2、项目介绍</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">追问：项目大致是做什么的，项目里用到了什么技术栈，你在项目中遇到的最大挑战是什么？</span><br><span class="line">反思：这一部分可能需要重新理一下项目介绍的脉络，尤其是亮点和相关技术栈。</span><br></pre></td></tr></table></figure>
+
+<p>3、<strong>HashMap和ConcurrentHashMap的区别？</strong></p>
+<ul>
+<li><p>HashMap在jdk1.8前后的区别 ：1.8前采用数组+链表，1.8后采用数组+链表/红黑树，链表&gt;8时进行treeify</p>
+</li>
+<li><p>HashMap线程不安全，ConcurrentHashMap解决了并发读写存在的问题，1.7前用到segment（锁区间），1.8之后synchronized锁住各个node的头结点（降低锁的粒度）</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">追问：Synchronized和CAS的区别？CAS底层的AQS知道吗？</span><br><span class="line">反思：</span><br><span class="line">1、HashMap和ConcurrentHashMap的几个核心阈值 </span><br><span class="line">2、AQS是轻量锁，实现在JDK层面，是JUC大部分类的底层，需要重点掌握</span><br><span class="line">3、Synchronized实现在unsafe类，原来为重量级锁，1.7后存在一个锁升级过程。重量级锁底层为Unsafe</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、知道ReentrentLock吗？大致讲述一下ReentrentLock的原理。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">反思：</span><br><span class="line">1、ReentrentLock是可重入锁，底层是继承自AQS的sync</span><br><span class="line">2、讲述一下AQS的原理，包括生成node、出入队列</span><br><span class="line">3、AQS核心知识点：</span><br><span class="line">	i、过程中发生的几次自旋</span><br><span class="line">	ii、LockSupport.park()/LockSupport.unpark()</span><br><span class="line">	iii、AQS队列由head/tail组成，node内包括prev/next/thread三个属性</span><br><span class="line">	iv、每次新线程入队列会改变队列内前一个node的waitStatus(0-&gt;-1)</span><br><span class="line">	v、持有锁的线程一定不在队列内。队列内的head一定是thread为null的node</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、简单介绍一下JVM？JVM反射原理？反射的静态加载和动态加载？</strong></p>
+<ul>
+<li>JVM由堆、虚拟机栈、元空间、本地方法栈、程序计数器组成。分别介绍一下各部分的功能。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">追问：Object obj = new Object()这句话执行时发生了什么？JAVA反射的原理是什么？反射里的静态加载和动态加载有什么区别？</span><br><span class="line">反思：</span><br><span class="line">1、Object obj = new Object()实际上有 申请空间-&gt;创建实例-&gt;初始化实例-&gt;关联引用 的过程。可以结合对象结构进一步讲下(对象头、对象类型指针、实例数据、补齐)</span><br><span class="line">2、JAVA反射可以参考：http://www.360doc.com/content/18/1220/15/99071_803150434.shtml</span><br><span class="line">3、反射原理是Reflect类读取.class文件获取对应类的属性和方法</span><br><span class="line">4、JVM通过类加载器将.class加载到JVM内存中，使用Reflect的方法对类反射调用时，如果类还没有初始化，需要触发初始化过程（此外，new/getStatic/putStatic/invokeStatic也会触发初始化）</span><br><span class="line">5、静态加载：new object() 动态加载Class.forName().newInstance()。静态加载会在编译时报错，而动态加载的ClassNotFoundException可以通过捕获解决</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、简单介绍一下Spring的IOC？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">追问：IOC实现过程是怎么样的？IOC中用到的bean是怎么生成的？</span><br><span class="line">反思：</span><br><span class="line">1、IOC-控制反转。将对象交给spring框架进行管理。</span><br><span class="line">2、bean创建过程：生成BeanFactory、通过xml或者注解加载Bean列表、初始化Bean(BeanPostProcessor进行前置/后置处理)、生成bean的aop对象、后续可通过getBean()方式获取</span><br></pre></td></tr></table></figure>
+
+<p><strong>7、http/ https区别？</strong></p>
+<ul>
+<li>https = http+SSL/TLS。在握手时使用了对称加密+非对称加密。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">追问：简单介绍一下三次握手和四次挥手？如果服务器上有大量close-wait的原因和解决方法？</span><br><span class="line">反思：</span><br><span class="line">1、tcp的三次握手和四次挥手(八股文)</span><br><span class="line">2、Close-wait的状态出现于第二次挥手到第三次挥手间，服务器不执行socket.clase()的话就不会迁移到LAST_ACK状态。大量的close-wait会导致服务器的fd被占用完，无法分配fd的话就无法建立新连接了。</span><br><span class="line">3、解决：从服务器代码定位</span><br><span class="line">扩展：</span><br><span class="line">1、TIME-WAIT为啥要默认的2MSL时间：确保服务端能收到最后一个ack包；防止下次连接收到这次的数据包</span><br><span class="line">2、解决TIME-WAIT：/etc/sysctl.conf开启系统的TIMEWAIT SOCKET重用和快速回收</span><br></pre></td></tr></table></figure>
+
+<p><strong>8、会RabbitMQ吗？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">反思：真没用过，和面试官说明了一下之后就跳出这个问题了。感觉上还是得知道一些基础知识和用法</span><br></pre></td></tr></table></figure>
+
+<p><strong>9、Redis快的原因？Redis常见数据类型有哪些</strong>？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">反思：这个没答出来，应该是多路复用io(epoll)+红黑树。</span><br><span class="line">1、类型：string、hash、list、set、sorted-set。redis3.2后为节省内存空间，不同类型向下还有多个子类型。</span><br></pre></td></tr></table></figure>
+
+<p><strong>10、MySQL隔离级别？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">追问：MySQL事务实现原理？如何实现悲观锁和乐观锁？ 给了个判断最左前缀匹配的sql(用btree性质判断)</span><br><span class="line">反思：</span><br><span class="line">1、未提交读、已提交读、可重复读、串行化</span><br><span class="line">2、事务实现基于innodb引擎，innodb引擎主要由redolog+undolog实现事务提交与回滚。细节需要进一步完善。</span><br><span class="line">3、index(a,b,c) 问where a=2 and b&gt;3 and c&lt;4用到了哪几个索引。根据最左前缀原则(Btree结构)，可以知道是a和b</span><br></pre></td></tr></table></figure>
+
+<p><strong>11、10w个数找第k个算法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">反思：</span><br><span class="line">1、堆排:o(nlogn)</span><br><span class="line">2、分治快排+随机pivot，理想状态o(n)</span><br></pre></td></tr></table></figure>
+
+<p><strong>12、手撕Leetcode32(20min)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">反思：只过了50%，估计是面试没过的主要原因，思路是对的，用栈去控制，但对于这种算连续长度的，最好考虑用下标入栈。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chnyge.github.io/MyHexo/interview-bytesdance-0.html" data-id="ckrjdzq3w00005pmzf1z8dzkm" data-title="字节一面面经(抖音电商服务端开发)(凉)" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/MyHexo/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/" rel="tag">字节跳动</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
 
 </section>
         <aside id="sidebar">
@@ -464,7 +556,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/Redis/" rel="tag">Redis</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/" rel="tag">字节跳动</a></li></ul>
     </div>
   </div>
 
@@ -484,6 +576,10 @@
             <a href="/MyHexo/interview-redis.html">Redis相关</a>
           </li>
         
+          <li>
+            <a href="/MyHexo/interview-bytesdance-0.html">字节一面面经(抖音电商服务端开发)(凉)</a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -493,7 +589,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/MyHexo/categories/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">面试知识点</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/MyHexo/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li><li class="category-list-item"><a class="category-list-link" href="/MyHexo/categories/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">面试知识点</a></li></ul>
     </div>
   </div>
 
