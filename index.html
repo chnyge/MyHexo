@@ -43,6 +43,129 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-阿里面试0804" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/MyHexo/interview-ali-0.html" class="article-date">
+  <time class="dt-published" datetime="2021-08-22T12:00:00.000Z" itemprop="datePublished">2021-08-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/MyHexo/categories/%E9%9D%A2%E7%BB%8F/">面经</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/MyHexo/interview-ali-0.html">阿里面试一面+二面+三面+HR面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong>相较于字节的面试流程，阿里的面试流程也是相当的快。从第一次收到内推通知邮件开始（8月1日），再到一、二、三与HR面完成，全程大概仅三周时间。截至目前（8月22日），刚完成入职体检，正等待最终的意向书…反思这次面试全流程，关键在于对自己所做项目的理解，以及常见数据结构和结构/应用场景型算法的掌握。</p>
+<h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><h3 id="时长"><a href="#时长" class="headerlink" title="时长"></a>时长</h3><p>20 + 55 (min)</p>
+<h3 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h3><p>在线测评+电话面试</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p><strong>1、在线测评</strong></p>
+<ul>
+<li>实现一套单机版HTTP过滤功能，对于相同的HTTP请求返回指定的错误码。基于单机版方案，能否通过适当的改造使其变成分布式版本方案？</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">个人思路：考虑HTTP类型(GET/POST/PUT) + url + body体的三元校验。单机版用多个Map实现缓存，分布式版用Redis的key维护缓存。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多线程编程：实现1 -&gt; 2 -&gt;3的交替打印</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">经典多线程题，LeetCode上有许多同类题，建议研究一下（例：https://leetcode-cn.com/problems/print-foobar-alternately/）。我采用的是两个Semaphore的方案，没啥原因，好写…</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、聊项目</strong></p>
+<ul>
+<li>大致聊了在校经历</li>
+<li>详细聊了项目经历，中间多次发散到八股文相关的内容<ul>
+<li>数据库选型，为什么XX项目里使用了PostgreSQL，而不用MySQL</li>
+<li>中间件选型，简述下MyBatis和Hibernate的区别</li>
+<li>线上问题定位，如何处理死锁</li>
+<li>JVM内存模型有哪些部分，简述</li>
+<li>有没有用过消息中间件，简述</li>
+<li>网络通信相关，HTTPS建立过程</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2><h3 id="时长-1"><a href="#时长-1" class="headerlink" title="时长"></a>时长</h3><p>50 (min)</p>
+<h3 id="形式-1"><a href="#形式-1" class="headerlink" title="形式"></a>形式</h3><p>线上面试</p>
+<h3 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h3><p>这一轮是未来的团队主管面。</p>
+<p><strong>1、聊项目</strong></p>
+<ul>
+<li>详细聊了项目经历<ul>
+<li>简述项目背景和项目架构</li>
+<li>个人在项目中所承担的职责</li>
+<li>个人在项目中曾经做过的最有价值的事（不管对内部成员还是对外部客户）</li>
+</ul>
+</li>
+<li>发散问题：平时是否关注新技术或者新领域<ul>
+<li>简述了一下近期关注的新技术</li>
+<li>聊聊对新技术的理解/应用场景/推广前景</li>
+</ul>
+</li>
+<li>双向沟通：<ul>
+<li>面试官大概介绍了下当前他所带的项目</li>
+<li>针对项目进行了简单的交流和意向沟通</li>
+</ul>
+</li>
+</ul>
+<p><strong>2、在线测评</strong></p>
+<ul>
+<li>手撕HashMap</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">实现HashMap的get/set两个方法，核心在于能否写出桶数组Entry[]、hash()和解决hash冲撞的方案。因为时间较短，我仅实现了简单的扩容和尾插法。</span><br><span class="line"></span><br><span class="line">个人感觉阿里对这类数据结构比较看重，除了常见的List/Map/Set外，像JUC内的AQS和相关类/LRU/LFU都有可能会涉及到</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三面"><a href="#三面" class="headerlink" title="三面"></a>三面</h2><h3 id="时长-2"><a href="#时长-2" class="headerlink" title="时长"></a>时长</h3><p>55 (min)</p>
+<h3 id="形式-2"><a href="#形式-2" class="headerlink" title="形式"></a>形式</h3><p>线上面试</p>
+<h3 id="过程-2"><a href="#过程-2" class="headerlink" title="过程"></a>过程</h3><p>这一轮是未来的部门主管面，面试前特地还百度了下面试官的名字，居然还有不少记录和采访视频，不禁有点小紧张…</p>
+<p><strong>1、聊项目</strong></p>
+<ul>
+<li>和二面的氛围相比，三面的技术层次更加得深<ul>
+<li>面试官会根据项目内的细节进一步发问，例如为什么要做这个项目、这个项目如何发挥价值、为什么选择这样的架构</li>
+<li>个人在项目中所承担的职责</li>
+<li>发散了一些数据库相关的八股文</li>
+</ul>
+</li>
+</ul>
+<p><strong>2、在线测评：N叉树中最大的连续节点长度</strong></p>
+<ul>
+<li>N叉树中每个节点都有一个数值val，求所形成的最大连续节点长度。仅考虑自顶向下的方向和val递增的场景。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">插曲1：一开始以为是二叉树，习惯性的用left/right定义TreeNode，面试官强调了一下N叉树的结构，只好将left/right改成了TreeNode[]的形式</span><br><span class="line"></span><br><span class="line">解决思路：采用全局变量res+迭代的思路，迭代方法为cal(TreeNode cur, int curLen)。对于每个节点，遍历其子节点，如果子节点与当前节点能形成连续，则cal(TreeNode.child, curLen+1)，如果不连续，则cal(TreeNode.child, 1)。每遍历到一个新节点时，更新全局变量res。</span><br><span class="line"></span><br><span class="line">插曲2：面试官发问，如果是多线程高并发的场景，会出现什么问题。因为习惯了LeetCode的刷题写法，没有注意到全局变量res可能会在多线程场景中被不同线程修改。同时，面试官指出了其中部分变量的命名不规范。</span><br><span class="line"></span><br><span class="line">插曲3：发现问题后，先后采取将方法作为对象方法(即每个线程new一个对象并调用)、ThreadLocal、加锁等方法，都不能让面试官满意。后来我将res封装了独立对象，各线程在调用该方法时都会生成相应对象，保证了数据的隔离。此时面试官才赞同地点了头，并且讲述了这么实现的好处，交流中还是有不小收获的。</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="HR面"><a href="#HR面" class="headerlink" title="HR面"></a>HR面</h2><h3 id="时长-3"><a href="#时长-3" class="headerlink" title="时长"></a>时长</h3><p>50min</p>
+<h3 id="形式-3"><a href="#形式-3" class="headerlink" title="形式"></a>形式</h3><p>线上面试</p>
+<h3 id="过程-3"><a href="#过程-3" class="headerlink" title="过程"></a>过程</h3><p>都是闲聊，包括在校经历、工作经历、性格等话题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chnyge.github.io/MyHexo/interview-ali-0.html" data-id="cksn42zvn0005xemz5fe7f1gi" data-title="阿里面试一面+二面+三面+HR面" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/MyHexo/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/" rel="tag">阿里巴巴</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/MyHexo/interview-MySQL.html" class="article-date">
@@ -331,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chnyge.github.io/MyHexo/interview-MySQL.html" data-id="ckrj80hhj0000zrmzfrho8sd9" data-title="MySQL相关" class="article-share-link">分享</a>
+      <a data-url="https://chnyge.github.io/MyHexo/interview-MySQL.html" data-id="cksn42zva0000xemz931ebaxe" data-title="MySQL相关" class="article-share-link">分享</a>
       
       
       
@@ -442,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chnyge.github.io/MyHexo/interview-redis.html" data-id="ckrj80hhq0001zrmz3rgh94ou" data-title="Redis相关" class="article-share-link">分享</a>
+      <a data-url="https://chnyge.github.io/MyHexo/interview-redis.html" data-id="cksn42zvg0001xemzfrp88wof" data-title="Redis相关" class="article-share-link">分享</a>
       
       
       
@@ -534,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chnyge.github.io/MyHexo/interview-bytesdance-0.html" data-id="ckrjdzq3w00005pmzf1z8dzkm" data-title="字节一面面经(抖音电商服务端开发)(凉)" class="article-share-link">分享</a>
+      <a data-url="https://chnyge.github.io/MyHexo/interview-bytesdance-0.html" data-id="cksn42zvl0004xemz7ctqhtaf" data-title="字节一面面经(抖音电商服务端开发)(凉)" class="article-share-link">分享</a>
       
       
       
@@ -556,7 +679,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/" rel="tag">字节跳动</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/" rel="tag">字节跳动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/MyHexo/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/" rel="tag">阿里巴巴</a></li></ul>
     </div>
   </div>
 
@@ -567,6 +690,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/MyHexo/interview-ali-0.html">阿里面试一面+二面+三面+HR面</a>
+          </li>
         
           <li>
             <a href="/MyHexo/interview-MySQL.html">MySQL相关</a>
@@ -599,7 +726,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/MyHexo/archives/2021/07/">七月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/MyHexo/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/MyHexo/archives/2021/07/">七月 2021</a></li></ul>
     </div>
   </div>
 
